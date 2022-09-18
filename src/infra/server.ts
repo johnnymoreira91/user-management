@@ -2,6 +2,7 @@
 import express from 'express'
 import morganMiddleware from './middlewares/morganMiddleware'
 import userRoute from './routes/userRoute'
+import adminRoute from './routes/adminRoute'
 import cors from 'cors'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
 app.use('/user', userRoute)
+app.use('/admin', adminRoute)
 
 app.get('/', (request, response) => {
   return response.json({ message: 'Welcame to SOLID nodejs API' })

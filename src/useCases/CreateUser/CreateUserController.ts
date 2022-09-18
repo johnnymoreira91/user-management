@@ -7,9 +7,9 @@ class CreateUserController {
   ) {}
 
   async handle (req: Request<{}, {}, {
-    name: string, email: string, password: string
+    name: string, email: string, password: string, age: number, active: boolean, isGuest: boolean
   }>, res: Response): Promise<Response> {
-    const { name, email, password } = req.body
+    const { name, email, password, age, active, isGuest } = req.body
     try {
       if (!name || !email || !password) {
         return res.status(400).json({
@@ -19,7 +19,10 @@ class CreateUserController {
       const data = await this.createUserUseCase.execute({
         name,
         email,
-        password
+        password,
+        age,
+        active: active || true,
+        isGuest: isGuest || false
       })
 
       return res.status(200).json(data)

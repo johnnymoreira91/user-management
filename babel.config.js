@@ -18,7 +18,9 @@ module.exports = {
         '@repositories': './src/repositories',
         '@providers': './src/providers',
         '@useCases': './src/useCases',
-        '@utils': './src/utils'
+        '@utils': './src/utils',
+        '@modelInfra': './src/infra/modelInfra',
+        '@database': './src/infra/database'
       }
     }]
   ],

@@ -1,8 +1,12 @@
 class IEditUserRequestDTO {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
+  id?: number
+  name: string
+  email: string
+  password: string
+  age: number
+  public_id: string
+  isGuest: boolean
+  active: boolean
 }
 
 export { IEditUserRequestDTO }

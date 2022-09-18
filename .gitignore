@@ -7,3 +7,4 @@ package-lock.json
 launch.json
 logs
 coverage
+devDb.db

@@ -15,6 +15,7 @@ class CreateUserUseCase {
     }
 
     const user = new User(data)
+    console.log(user, 'userr')
     return await this.usersRepository.save(user)
   }
 }
