@@ -41,7 +41,6 @@ const userGuest = new User({
 })
 
 async function InsertMock () {
-  console.log('INIT MOCK')
   await database.schema.dropTableIfExists('users')
   await createSchema()
   // const userArray: User[] = []
