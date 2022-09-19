@@ -8,3 +8,4 @@ launch.json
 logs
 coverage
 devDb.db
+testDb.db

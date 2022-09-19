@@ -1,7 +1,9 @@
 import { CreateUserUseCase } from '../CreateUserUseCase'
 import { UsersRepository } from '@repositories/implementations/UsersRepository'
+import { createSchema } from '@infra/database/createTables'
 import { User } from '@entities/User'
 import { InsertMock } from '@utils/mock'
+import { database } from '@infra/database/knex'
 
 describe('CreateUserUseCase test', () => {
   let createUserUseCase: CreateUserUseCase
@@ -10,17 +12,26 @@ describe('CreateUserUseCase test', () => {
   beforeAll(async () => {
     userRepository = new UsersRepository()
     createUserUseCase = new CreateUserUseCase(userRepository)
+    // await database.schema.dropTableIfExists('users')
+    // await createSchema()
     const users = await InsertMock()
-    for (const user of users) {
-      await createUserUseCase.execute(user)
-    }
+    // for (const user of users) {
+    //   await createUserUseCase.execute(user)
+    // }
+  })
+
+  beforeAll(async () => {
+    await database.schema.dropSchema
   })
 
   test('It Should create one user', async () => {
-    const user: Omit<User, 'id'> = {
+    const user = {
       name: 'superTest',
       email: 'superTest@test.com',
-      password: 'test'
+      password: 'test',
+      age: 50,
+      isGuest: false,
+      active: true
     }
 
     const data = await createUserUseCase.execute(user)

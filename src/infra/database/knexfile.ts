@@ -9,7 +9,7 @@ export default {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: {
-      filename: 'testDb.db'
+      filename: ':memory:'
     },
     pool: {
       min: 2,
