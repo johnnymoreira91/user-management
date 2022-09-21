@@ -3,6 +3,7 @@ import express from 'express'
 import morganMiddleware from './middlewares/morganMiddleware'
 import userRoute from './routes/userRoute'
 import adminRoute from './routes/adminRoute'
+import authRoute from './routes/authRoute'
 import cors from 'cors'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
+app.use('/auth', authRoute)
 app.use('/user', userRoute)
 app.use('/admin', adminRoute)
 

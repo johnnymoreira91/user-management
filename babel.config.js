@@ -21,7 +21,8 @@ module.exports = {
         '@utils': './src/utils',
         '@modelInfra': './src/infra/modelInfra',
         '@database': './src/infra/database',
-        '@config': './src/infra/config'
+        '@config': './src/infra/config',
+        '@shared': './src/shared'
       }
     }]
   ],
