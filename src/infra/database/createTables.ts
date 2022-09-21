@@ -2,7 +2,7 @@ import { database } from '@database/knex'
 
 async function createSchema () {
   if (await !database.schema.hasTable('users')) {
-    return
+    return { message: 'Table already exist' }
   }
 
   // Create database schema. You should use knex migration files
@@ -17,6 +17,7 @@ async function createSchema () {
     table.boolean('isGuest').defaultTo(false)
     table.boolean('active').defaultTo(true)
   })
+  return { message: 'Tables created' }
 }
 
 export { createSchema }

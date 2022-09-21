@@ -10,6 +10,24 @@ on:
   workflow_dispatch:
   
 jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+
+      - name: Run a one-line script
+        run: yarn install
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+
+      - name: Run a one-line script
+        run: yarn build
   tests:
     runs-on: ubuntu-latest
 
@@ -18,5 +36,5 @@ jobs:
       - uses: actions/setup-node@v2
 
       - name: Run a one-line script
-        run: yarn install && yarn test
+        run: yarn test
         

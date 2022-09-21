@@ -15,8 +15,9 @@ describe('CreateUserUseCase test', () => {
     await InsertMock()
   })
 
-  beforeAll(async () => {
+  afterAll(async () => {
     await database.schema.dropSchema
+    jest.clearAllMocks()
   })
 
   test('It Should create one user', async () => {

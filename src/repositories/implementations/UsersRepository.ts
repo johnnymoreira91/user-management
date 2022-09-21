@@ -19,7 +19,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   async update (id: number, user: User): Promise<User> {
-    const findUser = await UserModel.query().where('id', id).first()
+    // const findUser = await UserModel.query().where('id', id).first()
     await database.transaction(async trx => {
       return await UserModel.query(trx).update({
         active: user.active,
@@ -27,9 +27,9 @@ class UsersRepository implements IUsersRepository {
         email: user.email,
         name: user.name,
         password: user.password,
-        public_id: user.public_id,
-        isGuest: user.isGuest,
-        id: findUser.id
+        // public_id: findUser.public_id,
+        isGuest: user.isGuest
+        // id: findUser.id
       })
     })
     return user

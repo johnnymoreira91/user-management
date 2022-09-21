@@ -8,10 +8,10 @@ class EditUserController {
 
   async handle (req: Request<{id: string}, {}, {
     name: string, email: string, password: string, age: number,
-    isGuest: boolean, active: boolean, public_id: string
+    isGuest: boolean, active: boolean
   }>, res: Response): Promise<Response> {
     const { id } = req.params
-    const { name, email, password, age, isGuest, active, public_id } = req.body
+    const { name, email, password, age, isGuest, active } = req.body
     try {
       if (!id) {
         return res.status(400).json({
@@ -24,8 +24,8 @@ class EditUserController {
         password: password,
         age: age,
         isGuest: isGuest || false,
-        active: active || true,
-        public_id: public_id
+        active: active || true
+        // public_id: public_id
       })
       return res.status(200).json(data)
     } catch (error) {

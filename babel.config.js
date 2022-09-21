@@ -20,7 +20,8 @@ module.exports = {
         '@useCases': './src/useCases',
         '@utils': './src/utils',
         '@modelInfra': './src/infra/modelInfra',
-        '@database': './src/infra/database'
+        '@database': './src/infra/database',
+        '@config': './src/infra/config'
       }
     }]
   ],

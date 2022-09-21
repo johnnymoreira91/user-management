@@ -4,7 +4,7 @@ class IEditUserRequestDTO {
   email: string
   password: string
   age: number
-  public_id: string
+  // public_id: string
   isGuest: boolean
   active: boolean
 }
