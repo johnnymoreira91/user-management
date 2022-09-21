@@ -2,9 +2,12 @@ import { createUserController } from '@useCases/CreateUser'
 import { deleteUserController } from '@useCases/DeleteUser'
 import { editUserController } from '@useCases/EditUser'
 import { listUserController } from '@useCases/ListUser'
+import authMiddleware from '@infra/middlewares/authmiddleware'
 import { Router } from 'express'
 
 const router = Router()
+
+router.use(authMiddleware)
 
 router.get('/', (req, res) => {
   return listUserController.handle(req, res)
