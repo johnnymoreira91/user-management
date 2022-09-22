@@ -15,12 +15,17 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
+app.set('view engine', 'ejs')
+app.set('views', './src/infra/views')
+
 app.use('/auth', authRoute)
 app.use('/user', userRoute)
 app.use('/admin', adminRoute)
 
 app.get('/', (request, response) => {
-  return response.json({ message: 'Welcame to SOLID nodejs API' })
+  // return response.json({ message: 'Welcame to SOLID nodejs API' })
+  // return response.status(200).render('initialPage')
+  return response.render('initialPage')
 })
 
 export default app

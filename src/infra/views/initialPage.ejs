@@ -1,0 +1,45 @@
+<%- include('parts/header'); %>
+
+<div class="row">
+  <div class="center">
+    <h3>Api - User Management</h3>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Server</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Application</th>
+            <td><span class="badge text-bg-success">Success</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Database</th>
+            <td><span class="badge text-bg-success">Success</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Redis</th>
+            <td><span class="badge text-bg-danger">Danger</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Node-Cache</th>
+            <td><span class="badge text-bg-warning">Warning</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Kafka</th>
+            <td><span class="badge text-bg-success">Success</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">two</div>
+  </div>
+
+  <%- include('parts/footer'); %>
