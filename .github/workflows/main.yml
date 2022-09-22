@@ -1,24 +1,24 @@
-name: CI-back - Deploy n' tests
+# name: CI-back - Deploy n' tests
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  test:
-    name: deploy
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
-    steps:
+# jobs:
+#   test:
+#     name: deploy
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [18.x]
+#     steps:
 
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+#     - uses: actions/checkout@v2
+#     - name: Use Node.js ${{ matrix.node-version }}
+#       uses: actions/setup-node@v1
+#       with:
+#         node-version: ${{ matrix.node-version }}
 
-    - name: Run a line to get a yarn and sls install
-      run: yarn install && yarn test
+#     - name: Run a line to get a yarn and sls install
+#       run: yarn install && yarn test

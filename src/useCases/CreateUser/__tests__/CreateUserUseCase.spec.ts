@@ -1,17 +1,21 @@
 import { CreateUserUseCase } from '../CreateUserUseCase'
 import { UsersRepository } from '@repositories/implementations/UsersRepository'
-import { createSchema } from '@infra/database/createTables'
-import { User } from '@entities/User'
+import { KafkaServiceProducer } from '@infra/services/kafkaProducer/KafkaProducer'
 import { InsertMock } from '@utils/mock'
 import { database } from '@infra/database/knex'
 
 describe('CreateUserUseCase test', () => {
   let createUserUseCase: CreateUserUseCase
   let userRepository: UsersRepository
+  let kafkaServiceProducer: KafkaServiceProducer
 
   beforeAll(async () => {
     userRepository = new UsersRepository()
-    createUserUseCase = new CreateUserUseCase(userRepository)
+    kafkaServiceProducer = new KafkaServiceProducer()
+    createUserUseCase = new CreateUserUseCase(
+      userRepository,
+      kafkaServiceProducer
+    )
     await InsertMock()
   })
 
