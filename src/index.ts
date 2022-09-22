@@ -1,11 +1,13 @@
-import app from "@infra/server"
+import app from '@infra/server'
+
+const port = Number(process.env.PORT) || 3001
 
 if (process.env.NODE_ENV === 'dev') {
-  Connect(3001, 'dev')
+  Connect(port, 'dev')
 } else if (process.env.NODE_ENV === 'prod') {
-  Connect(8080, 'prod')
+  Connect(port, 'prod')
 } else {
-  Connect(3001, 'NO_AMBIENT_DEFINED')
+  Connect(port, 'NO_AMBIENT_DEFINED')
 }
 
 function Connect (port: number, stage: string) {
