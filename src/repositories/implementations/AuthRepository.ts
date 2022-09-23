@@ -27,7 +27,7 @@ class AuthRepository {
       const body = {
         message: `${login.email} has been authenticated`,
         accessToken,
-        user: user.name,
+        user: user,
         id: user.public_id,
         ip: ip
       }
