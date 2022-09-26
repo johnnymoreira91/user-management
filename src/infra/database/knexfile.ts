@@ -61,7 +61,7 @@ export default {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: {
-      filename: 'devDb.db'
+      filename: 'prodDb.db'
     },
     pool: {
       min: 2,
