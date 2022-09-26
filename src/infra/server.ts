@@ -4,11 +4,28 @@ import morganMiddleware from './middlewares/morganMiddleware'
 import userRoute from './routes/userRoute'
 import adminRoute from './routes/adminRoute'
 import authRoute from './routes/authRoute'
+import { createServer } from 'http'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import { Server, Socket } from 'socket.io'
 dotenv.config()
 
 const app = express()
+const httpServer = createServer(app)
+
+const io = new Server(httpServer, {
+  path: '/socket.io',
+  cors: {
+    origin: '*'
+  }
+})
+
+io.on('connection', (data) => {
+  console.log(data.id)
+  data.on('disconnect', (dc) => {
+    console.log(`client ${data.id} disconnected`)
+  })
+})
 
 app.use(morganMiddleware)
 app.use(express.json())
@@ -22,10 +39,11 @@ app.use('/auth', authRoute)
 app.use('/user', userRoute)
 app.use('/admin', adminRoute)
 
-app.get('/', (request, response) => {
-  // return response.json({ message: 'Welcame to SOLID nodejs API' })
-  // return response.status(200).render('initialPage')
+app.get('/', (_request, response) => {
   return response.render('initialPage')
 })
 
-export default app
+export {
+  httpServer,
+  io
+}

@@ -1,4 +1,4 @@
-import app from '@infra/server'
+import { httpServer } from '@infra/server'
 
 const port = Number(process.env.PORT) || 3001
 
@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 function Connect (port: number, stage: string) {
-  app.listen(port, () => {
+  httpServer.listen(port, () => {
     console.log(`Running on ${stage} process`)
   })
 }
