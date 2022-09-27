@@ -9,6 +9,7 @@ class SocketIO {
     this.socket.initializeHandlers([
       { path: '/socket.io', handler: new OrdersSocket() }
     ])
+    // this.socket.on('condiction')
   }
 
   listen () {
@@ -21,6 +22,9 @@ class SocketIO {
   }
 
   emit (channel: string, message: string) {
+    // this.socket.on('connection', () => {
+    //   this.socket.emit(channel, message)
+    // })
     this.socket.emit(channel, message)
   }
 }
