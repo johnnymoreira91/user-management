@@ -39,12 +39,30 @@
         </tbody>
       </table>
     </div>
-    <div class="col">two</div>
+    <div class="col">
+      <div id="messages">
+        <span class="badge text-bg-danger">Offline</span>
+      </div>
+    </div>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    var socket = io();
+    const socket = io('http://localhost:3001');
+    socket.on('msg', (data) => {
+      const body = JSON.parse(data)
+      const div = document.getElementById('messages');
+      if (div) {
+        let html
+        if (div.innerHTML) {
+          html = `<span class="badge text-bg-success">${body}</span>`
+          div.innerHTML = html
+        } else {
+          html = `<span class="badge text-bg-danger">Offline</span>`
+          div.innerHTML = html
+        }
+      }
+    })
   </script>
 
   <%- include('parts/footer'); %>

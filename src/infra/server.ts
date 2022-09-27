@@ -7,25 +7,10 @@ import authRoute from './routes/authRoute'
 import { createServer } from 'http'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { Server, Socket } from 'socket.io'
 dotenv.config()
 
 const app = express()
 const httpServer = createServer(app)
-
-const io = new Server(httpServer, {
-  path: '/socket.io',
-  cors: {
-    origin: '*'
-  }
-})
-
-io.on('connection', (data) => {
-  console.log(data.id)
-  data.on('disconnect', (dc) => {
-    console.log(`client ${data.id} disconnected`)
-  })
-})
 
 app.use(morganMiddleware)
 app.use(express.json())
@@ -44,6 +29,5 @@ app.get('/', (_request, response) => {
 })
 
 export {
-  httpServer,
-  io
+  httpServer
 }
