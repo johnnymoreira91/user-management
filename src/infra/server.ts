@@ -33,5 +33,6 @@ app.get('/', (_request, response) => {
 })
 
 export {
-  httpServer
+  httpServer,
+  io
 }

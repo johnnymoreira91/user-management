@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { createSchema } from '@infra/database/createTables'
-import { SocketIO } from '@infra/services/SocketIo/SocketClient'
+import { io } from '@infra/server'
 
 const router = Router()
 
@@ -15,7 +15,6 @@ router.get('/table', async (req, res) => {
 
 router.get('/teste', async (req, res) => {
   const teste = req.query.teste
-  const io = new SocketIO()
   try {
     await io.emit('msg', JSON.stringify(teste))
     return res.status(201).json(teste)
