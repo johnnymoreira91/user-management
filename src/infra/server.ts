@@ -6,8 +6,10 @@ import adminRoute from './routes/adminRoute'
 import authRoute from './routes/authRoute'
 import { createServer } from 'http'
 import { SocketIO } from './services/SocketIo/SocketClient'
+import { PingForeverWithSocket } from './services/PingService/PingForeverWithSocket'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import { PingServiceHostname } from '@shared/enum/PingServiceHostname'
 dotenv.config()
 
 const app = express()
@@ -27,6 +29,7 @@ app.use('/admin', adminRoute)
 
 const io = new SocketIO()
 io.listen()
+PingForeverWithSocket(io, 'application', PingServiceHostname.application)
 
 app.get('/', (_request, response) => {
   return response.render('initialPage')

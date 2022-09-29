@@ -13,12 +13,14 @@
           <tr>
             <th scope="col">Server</th>
             <th scope="col">Status</th>
+            <th scope="col">Ping</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">Application</th>
-            <td><span class="badge text-bg-success">Success</span></td>
+            <td id="messages"></td>
+            <td id="ping"></td>
           </tr>
           <tr>
             <th scope="row">Database</th>
@@ -40,28 +42,71 @@
       </table>
     </div>
     <div class="col">
-      <div id="messages">
+      <!-- <div id="messages">
         <span class="badge text-bg-danger">Offline</span>
-      </div>
+      </div> -->
     </div>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io('http://localhost:3001');
-    socket.on('msg', (data) => {
+
+    function sender() {
+      // socket.on('connection', (data) => {
+      //   console.log(data.id, 'iddd')
+      //   socket.emit('ret', 'error')
+      // })
+      socket.on("connect", () => {
+  console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+});
+    }
+    socket.on('application', (data) => {
       const body = JSON.parse(data)
-      const div = document.getElementById('messages');
+      const divMsg = document.getElementById('messages');
+      const div = document.getElementById('ping');
       if (div) {
         let html
         if (div.innerHTML) {
-          html = `<span class="badge text-bg-success">${body}</span>`
-          div.innerHTML = html
+          if (body > 40 && body < 50) {
+            html = `<span class="badge text-bg-warning">${body}</span>`
+            div.innerHTML = html
+          } else if (body >= 50) {
+            html = `<span class="badge text-bg-danger">${body}</span>`
+            div.innerHTML = html
+            socket.on('connection', (data) => {
+              // data.emit('ret', 'error')
+              sender()
+            })
+          } else {
+            html = `<span class="badge text-bg-success">${body}</span>`
+            div.innerHTML = html
+          }
         } else {
           html = `<span class="badge text-bg-danger">Offline</span>`
           div.innerHTML = html
         }
       }
+
+      if (divMsg) {
+        let html
+        if (divMsg.innerHTML) {
+          if (body > 40 && body < 50) {
+            html = `<span class="badge text-bg-warning">Warning</span>`
+            divMsg.innerHTML = html
+          } else if (body >= 50) {
+            html = `<span class="badge text-bg-danger">Danger</span>`
+            divMsg.innerHTML = html
+          } else {
+            html = `<span class="badge text-bg-success">Success</span>`
+            divMsg.innerHTML = html
+          }
+        } else {
+          html = `<span class="badge text-bg-danger">Offline</span>`
+          divMsg.innerHTML = html
+        }
+      }
+      
     })
   </script>
 
