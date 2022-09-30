@@ -17,6 +17,7 @@ class SocketIO {
       console.log(data.id, 'dataaaa')
       data.on('teste', (data2) => {
         console.log(data2)
+        this.socket.emit('msg', data2)
       })
       this.socket.on('disconnect', () => {
         console.log(`${data.id} disconnected`)

@@ -46,6 +46,7 @@
         <!-- <span class="badge text-bg-danger">Offline</span> -->
       </div>
       <input type="text" id="d1" />
+      <button onclick="processSender()">Enviar</button>
     </div>
   </div>
 
@@ -54,27 +55,23 @@
     const sender = document.getElementById("d1")
     const socket = io();
 
-    socket.on('msg', (data) => {
-      console.log('👾 New socket connected! >>', data.id)
+    // socket.on('msg', (data) => {
+    //   const divMsg = document.getElementById('messages2');
+    //   if (divMsg) {
+    //     divMsg.innerHTML = `<span class="badge text-bg-success">${JSON.parse(data)}</span>`
+    //     socket.emit('teste', data)
+    //   }
+
+    // })
+    function processSender() {
+      const data = document.getElementById("d1").value
       const divMsg = document.getElementById('messages2');
       if (divMsg) {
-        divMsg.innerHTML = `<span class="badge text-bg-success">${JSON.parse(data)}</span>`
-        socket.broadcast.emit('teste', data)
+        divMsg.innerHTML = `<span class="badge text-bg-success">${data}</span>`
       }
-      // const body = sender.addEventListener("input", () => { return document.getElementById("d1").value });
-    })
-
-    // setInterval(() => {
-    //     socket.emit('teste', 'enviandooo')
-    //   }, 3000);
-    // socket.on('teste', (data) => {
-    //   console.log('👾 data>>', data)
-    //   setInterval(() => {
-    //     socket.emit
-    //   }, 3000);
-    // })
-
-    // socket.emit('teste', 'ta ai o testeeee')
+      socket.emit('teste', data)
+      document.getElementById("d1").value = ''
+    }
 
     socket.on('application', (data) => {
       const body = JSON.parse(data)
@@ -88,13 +85,7 @@
             div.innerHTML = html
           } else if (body >= 50) {
             html = `<span class="badge text-bg-danger">${body}</span>`
-            socket.emit('teste', 'enviandooo')
-            // data.emit('teste', `Danger on ${new Date()}`)
             div.innerHTML = html
-            // socket.on('connection', (data) => {
-            //   // data.emit('ret', 'error')
-            //   sender()
-            // })
           } else {
             html = `<span class="badge text-bg-success">${body}</span>`
             div.innerHTML = html
