@@ -30,6 +30,7 @@ app.use('/admin', adminRoute)
 const io = new SocketIO()
 io.listen()
 PingForeverWithSocket(io, 'application', PingServiceHostname.application)
+io.emit('teste', 'senderrr')
 
 app.get('/', (_request, response) => {
   return response.render('initialPage')

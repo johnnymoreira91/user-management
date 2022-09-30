@@ -9,12 +9,15 @@ class SocketIO {
     this.socket.initializeHandlers([
       { path: '/socket.io', handler: new OrdersSocket() }
     ])
-    // this.socket.on('condiction')
   }
 
   listen () {
+    console.log('listennn')
     this.socket.on('connection', (data) => {
       console.log(data.id, 'dataaaa')
+      data.on('teste', (data2) => {
+        console.log(data2)
+      })
       this.socket.on('disconnect', () => {
         console.log(`${data.id} disconnected`)
       })
@@ -22,9 +25,6 @@ class SocketIO {
   }
 
   emit (channel: string, message: string) {
-    // this.socket.on('connection', () => {
-    //   this.socket.emit(channel, message)
-    // })
     this.socket.emit(channel, message)
   }
 }

@@ -42,25 +42,40 @@
       </table>
     </div>
     <div class="col">
-      <!-- <div id="messages">
-        <span class="badge text-bg-danger">Offline</span>
-      </div> -->
+      <div id="messages2">
+        <!-- <span class="badge text-bg-danger">Offline</span> -->
+      </div>
+      <input type="text" id="d1" />
     </div>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    const socket = io('https://user-srv.herokuapp.com/');
+    const sender = document.getElementById("d1")
+    const socket = io();
 
-    function sender() {
-      // socket.on('connection', (data) => {
-      //   console.log(data.id, 'iddd')
-      //   socket.emit('ret', 'error')
-      // })
-      socket.on("connect", () => {
-  console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-});
-    }
+    socket.on('msg', (data) => {
+      console.log('👾 New socket connected! >>', data.id)
+      const divMsg = document.getElementById('messages2');
+      if (divMsg) {
+        divMsg.innerHTML = `<span class="badge text-bg-success">${JSON.parse(data)}</span>`
+        socket.broadcast.emit('teste', data)
+      }
+      // const body = sender.addEventListener("input", () => { return document.getElementById("d1").value });
+    })
+
+    // setInterval(() => {
+    //     socket.emit('teste', 'enviandooo')
+    //   }, 3000);
+    // socket.on('teste', (data) => {
+    //   console.log('👾 data>>', data)
+    //   setInterval(() => {
+    //     socket.emit
+    //   }, 3000);
+    // })
+
+    // socket.emit('teste', 'ta ai o testeeee')
+
     socket.on('application', (data) => {
       const body = JSON.parse(data)
       const divMsg = document.getElementById('messages');
@@ -73,11 +88,13 @@
             div.innerHTML = html
           } else if (body >= 50) {
             html = `<span class="badge text-bg-danger">${body}</span>`
+            socket.emit('teste', 'enviandooo')
+            // data.emit('teste', `Danger on ${new Date()}`)
             div.innerHTML = html
-            socket.on('connection', (data) => {
-              // data.emit('ret', 'error')
-              sender()
-            })
+            // socket.on('connection', (data) => {
+            //   // data.emit('ret', 'error')
+            //   sender()
+            // })
           } else {
             html = `<span class="badge text-bg-success">${body}</span>`
             div.innerHTML = html
@@ -106,8 +123,9 @@
           divMsg.innerHTML = html
         }
       }
-      
+
     })
+    
   </script>
 
   <%- include('parts/footer'); %>
