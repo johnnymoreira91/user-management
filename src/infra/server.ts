@@ -10,6 +10,7 @@ import { PingForeverWithSocket } from './services/PingService/PingForeverWithSoc
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { PingServiceHostname } from '@shared/enum/PingServiceHostname'
+import { circuitBreak } from './services/CircuitBreaker'
 dotenv.config()
 
 const app = express()
@@ -32,7 +33,8 @@ io.listen()
 PingForeverWithSocket(io, 'application', PingServiceHostname.application)
 io.emit('teste', 'senderrr')
 
-app.get('/', (_request, response) => {
+app.get('/', async (_request, response) => {
+  await circuitBreak.fire()
   return response.render('initialPage')
 })
 
