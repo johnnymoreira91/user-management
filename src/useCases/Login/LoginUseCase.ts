@@ -16,7 +16,7 @@ class LoginUseCase {
       throw new Error('User not found')
     }
 
-    return this.authRepository.doLogin(findUser, data.password, data.ip, data.cacheKey)
+    return this.authRepository.doLogin(findUser, data.password, data.ip, data.cacheKey, data.res)
   }
 }
 

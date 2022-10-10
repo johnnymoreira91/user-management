@@ -19,7 +19,8 @@ class LoginController {
           email,
           password,
           ip: req.socket.remoteAddress ?? 'Ip not found!',
-          cacheKey
+          cacheKey,
+          res
         })
         return res.status(200).json(data)
       }

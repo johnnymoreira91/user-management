@@ -9,6 +9,7 @@ class UserModel extends Model {
   public_id: string
   isGuest: boolean
   active: boolean
+  permission: number
 
   static get tableName () {
     return 'users'

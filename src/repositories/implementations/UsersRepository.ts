@@ -37,15 +37,17 @@ class UsersRepository implements IUsersRepository {
 
   async save (user: User): Promise<User> {
     await database.transaction(async trx => {
-      await UserModel.query(trx).insert({
-        name: user.name,
-        email: user.email,
-        password: user.password,
-        active: user.active,
-        age: user.age,
-        isGuest: user.isGuest,
-        public_id: user.public_id
-      })
+      // await UserModel.query(trx).insert({
+      //   name: user.name,
+      //   email: user.email,
+      //   password: user.password,
+      //   active: user.active,
+      //   age: user.age,
+      //   isGuest: user.isGuest,
+      //   public_id: user.public_id,
+      //   permission: user.permission
+      // })
+      await UserModel.query(trx).insert({ ...user })
     })
     return user
   }

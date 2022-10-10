@@ -1,7 +1,7 @@
 import { User } from '@entities/User'
-import { Request } from 'express'
+import { Request, Response } from 'express'
 import { LoginReturn } from '@shared/interfaces/LoginReturn'
 
 export interface IAuthRepository {
-  doLogin(login: User, password: string, ip: string, cacheKey: string): Promise<LoginReturn>;
+  doLogin(login: User, password: string, ip: string, cacheKey: string, res: Response): Promise<LoginReturn>;
 }
